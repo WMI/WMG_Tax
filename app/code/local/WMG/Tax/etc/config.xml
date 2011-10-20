@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<WMG_Tax>
+			<version>0.1.0</version>
+		</WMG_Tax>
+	</modules>
+	<global>
+		<models>
+			<tax>
+				<rewrite>
+					<sales_total_quote_subtotal>WMG_Tax_Model_Sales_Total_Quote_Subtotal</sales_total_quote_subtotal>
+				</rewrite>
+			</tax>
+		</models>
+	</global>
+</config>
