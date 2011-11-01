@@ -2,21 +2,23 @@
 
 The WMG_Tax module addresses an issue within Magento whereby Magento is unable to correctly apply tax rules for different tax rates to product prices including tax (gross) without the gross price changing upon the tax rate changing
 
-It is common within Europe for prices to include tax, and for a vendor to want to preserve "nice pricing" (eg ending in .99). Without this modification, it's currently not possible to preserve nice pricing and to serve multiple tax rates
+It is common within Europe for prices to include tax, and for a vendor to want to preserve "nice pricing" (eg ending in .99). In order to preserve nice pricing where multiple tax rates exist, the vendor can only achieve this by flexing both the taxable element AND the net price of the product. In some instances, this will mean the vendor will make less profit selling to customers resident where there is a higher tax rate, but this is often an acceptable drawback in order to preserve uniform pricing 
+
+Without the WMG_Tax module, it's currently not possible to preserve nice pricing and to serve multiple tax rates within Magento
 
 ## Why multiple tax rates? ##
 
-Within Europe, once a vendor has shipped value of goods greater than a specific threshold (generally, equivalent to ~€100,000) into an EU member state (within 12 months) they are required to register for VAT within that EU member state. At this point, the vendor must then charge VAT to customers who have thier goods shipped to this memberstate at the correct VAT rate for the member state. For any other EU member state where the vendor is NOT VAT registered, they must continue to charge VAT at the rate of the member state in which the vendor is based
+Within Europe, once a vendor has shipped value of goods greater than a specific threshold (generally, equivalent to ~€100,000) into an EU member state (within 12 months) they are required to register for VAT within that EU member state. At this point, the vendor must then charge VAT to customers who have thier goods shipped to this member state at the correct VAT rate for the member state. For any other EU member state where the vendor is *NOT* VAT registered, they must continue to charge VAT at the rate of the member state in which the vendor is based
 
-An example would be if a vendor is based in UK, which currently has a VAT rate of 20%. This vendor would charge 20% VAT to ALL EU member customers until reaching the VAT registration threshold of another EU member state (say, Italy). At which point, the vendor would be required to register for VAT in Italy, and charge their Italian customers at the current Italian VAT rate, which is 21%
+An example would be if a vendor is based in UK, which currently has a VAT rate of 20%. This vendor would charge 20% VAT to *ALL* EU member customers until reaching the VAT registration threshold of another EU member state (say, Italy). At which point, the vendor would be required to register for VAT in Italy, and charge their Italian customers at the current Italian VAT rate, which is 21%
 
-In the above example, (with Gross pricing) if a product costs 9.99 within Magento the cost to EVERYBODY except customers in Italy would be 9.99, however, for those customers in Italy, the price would be 9.67
+In the above example, (with Gross pricing) if a product costs 9.99 within Magento the cost to *EVERYBODY* except customers in Italy would be 9.99, however, for those customers in Italy, the price would be 9.67
 
 This is because of the incorrect way in which Magento calculates gross prices. First, it deducts the default tax from the gross price - in this case, it deducts 20% (or 1.998) to arrive at what Magento believes to be the NET price (7.992). Magento then proceeds to ADD the new tax rate (7.992 * 0.21 = 1.67832) to the newly derived net figure, which gives us 7.992 + 1.67832 = 9.67.  
 
-Although our tax rate is higher, it's cost the customer LESS. This is obviously wrong - what we want to achieve here is that that gross price remains at 9.99, and the tax element within that 9.99 changes accordingly
+Although our tax rate is higher, it's cost the customer *LESS*. This is obviously wrong - what we want to achieve here is that that gross price remains at 9.99, and the tax element within that 9.99 changes accordingly
 
-Eg, for our UK customers, the tax element would be 1.998, and for our Italian customers, the tax element would be 2.097
+Eg, for our UK customers, the tax element would be 1.998, and for our Italian customers, the tax element would be 2.097 - a different of 0.10, not a difference of 0.22
 
 ## How does WMG_Tax work? ##
 
