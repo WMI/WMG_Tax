@@ -12,7 +12,7 @@ An example would be if a vendor is based in UK, which currently has a VAT rate o
 
 In the above example, (with Gross pricing) if a product costs 9.99 within Magento the cost to EVERYBODY except customers in Italy would be 9.99, however, for those customers in Italy, the price would be 9.67
 
-This is because of the incorrect way in which Magento calculates gross prices. First, it deducts the default tax from the gross price - in this case, it deducts 20% (or 1.998) to arrive at what Magento believes to be the NET price (7.992). Magento then proceeds to ADD the new tax rate (7.992 * 0.21 = 1.67832) to the newly derived net figure, which gives us 7.992 + 1.67832 = 9.67).  
+This is because of the incorrect way in which Magento calculates gross prices. First, it deducts the default tax from the gross price - in this case, it deducts 20% (or 1.998) to arrive at what Magento believes to be the NET price (7.992). Magento then proceeds to ADD the new tax rate (7.992 * 0.21 = 1.67832) to the newly derived net figure, which gives us 7.992 + 1.67832 = 9.67.  
 
 Although our tax rate is higher, it's cost the customer LESS. This is obviously wrong - what we want to achieve here is that that gross price remains at 9.99, and the tax element within that 9.99 changes accordingly
 
@@ -52,4 +52,4 @@ Due to well known issues with 2 digit rounding precision in some versions of Mag
 
 ## Compatibility ##
 
-At the moment, this module has only been verified to work on Magento Enterprise 1.9 - it's possible that it will work on other Magento versions, however, initial indications after looking at Magento EC 1.6.1.0 are that it will not work without modification on the Magento 1.6 CE series. As Magento CE and Magento PE are investigated, we'll add branches into the repository specific for each version of Magento  
+At the moment, this module has only been verified to work on Magento Enterprise 1.9 - it's possible that it will work on other Magento versions, however, initial indications after looking at Magento CE 1.6.1.0 are that it will not work without modification on the Magento 1.6 CE series. As Magento CE and Magento PE are investigated, we'll add branches into the repository specific for each version of Magento  
